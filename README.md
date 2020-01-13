@@ -11,7 +11,8 @@ let
   pkgs = import (builtins.fetchGit {
     url = "git@github.com:EarnestResearch/er-nix";
     ref = "refs/heads/master";
-    rev = "e4813e235ec3a39b31fef1f306e8ac2a73a37031";
+    # git ls-remote git@github.com:EarnestResearch/er-nix refs/heads/master | awk '{ print "rev = \""$1"\";" }'
+    rev = "127c670a010cb60f3cd6bc89b2622562ae3ba82b";
   }) {}
 in
   ...
