@@ -46,3 +46,19 @@ One can invoke this (if it's in the file release.nix):
 ```
 nix-build -L -f ./release.nix
 ```
+
+## Development
+
+### Updating sources
+
+We use [niv](https://github.com/nmattia/niv) to manage our source pins.  `niv` is available in the nix-shell for this project.  To update a single source:
+
+```sh
+niv update nixpkgs-unstable
+```
+
+To update all sources:
+
+```sh
+niv update
+```

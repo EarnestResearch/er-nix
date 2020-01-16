@@ -1,7 +1,0 @@
-{
-  "url": "https://github.com/hercules-ci/pre-commit-hooks.nix",
-  "rev": "5c3078ad58856ce22f883b5518879d27bfc59dd5",
-  "date": "2019-11-25T17:28:10+00:00",
-  "sha256": "1rwmzzifn5gg7d10v4iia58m5zrx3f60zsddil9via31rfb6f7wy",
-  "fetchSubmodules": false
-}

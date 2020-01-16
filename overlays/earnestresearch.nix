@@ -1,9 +1,8 @@
 self: super:
 
 let
-  sources = import ../sources;
-
-  pre-commit-hooks = sources.pre-commit-hooks;
+  sources = import ../nix/sources.nix;
+  pre-commit-hooks = import sources.pre-commit-hooks;
 in
 {
   earnestresearch = {

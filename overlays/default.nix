@@ -1,5 +1,6 @@
 let
-  upstreamHaskellNix = (import ../sources).haskell-nix;
+  sources = import ../nix/sources.nix;
+  upstreamHaskellNix = import sources.haskell-nix;
   localOverlays =
     [
       (import ./pin-stackage.nix)
