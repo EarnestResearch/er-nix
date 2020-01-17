@@ -1,11 +1,10 @@
 let
-  sources = import ./sources;
-
-  haskell-nix = sources.haskell-nix;
+  sources = import ./nix/sources.nix;
+  haskell-nix = import sources.haskell-nix;
 in
 rec {
   # A pinned version of nixpkgs, widely used and hopefully well cached.
-  defaultNixpkgs = sources.nixpkgs;
+  defaultNixpkgs = import sources.nixpkgs;
 
   # A package set for the specified system, based on `defaultNixpkgs` with all overlays applied.
   pkgsForSystem = system: defaultNixpkgs (nixpkgsArgs // { inherit system; });
@@ -20,4 +19,6 @@ rec {
   overlays = haskell-nix.overlays ++ (import ./overlays);
 
   ides = import ./ides;
+
+  inherit (import sources.niv {}) niv;
 }

@@ -5,6 +5,7 @@ in
   with pkgs; mkShell {
     inherit (earnestresearch.pre-commit-check) shellHook;
     buildInputs = [
+      bootstrap.niv
       nixpkgs-fmt
     ];
   }

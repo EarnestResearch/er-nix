@@ -1,7 +1,0 @@
-{
-  "url": "https://github.com/input-output-hk/haskell.nix",
-  "rev": "801f05fa175d07bf9e4542bfd558180072288fe6",
-  "date": "2020-01-15T01:10:14+00:00",
-  "sha256": "1nn7j9vpgcxhgfrdn70g53759wb8m9p350m6srq32v73jhl4a8ar",
-  "fetchSubmodules": false
-}
