@@ -2,5 +2,6 @@
 [
   (import ./pin-stackage.nix)
   (import ./icu.nix)
+  (import ./darwin.nix)
   (import ./earnestresearch.nix)
 ]

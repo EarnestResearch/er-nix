@@ -1,0 +1,26 @@
+diff --git x509-system/System/X509.hs x509-system/System/X509.hs
+index 57e004b..5dccad0 100644
+--- x509-system/System/X509.hs
++++ x509-system/System/X509.hs
+@@ -12,8 +12,6 @@ module System.X509
+ 
+ #if defined(WINDOWS)
+ import System.X509.Win32
+-#elif defined(MACOSX)
+-import System.X509.MacOS
+ #else
+ import System.X509.Unix
+ #endif
+diff --git x509-system/System/X509/Unix.hs x509-system/System/X509/Unix.hs
+index 5c7b25f..85a84f1 100644
+--- x509-system/System/X509/Unix.hs
++++ x509-system/System/X509/Unix.hs
+@@ -34,7 +34,7 @@ defaultSystemPaths =
+     ]
+ 
+ envPathOverride :: String
+-envPathOverride = "SYSTEM_CERTIFICATE_PATH"
++envPathOverride = "NIX_SSL_CERT_FILE"
+ 
+ getSystemCertificateStore :: IO CertificateStore
+ getSystemCertificateStore = mconcat . catMaybes <$> (getSystemPaths >>= mapM readCertificateStore)
