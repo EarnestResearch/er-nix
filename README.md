@@ -77,6 +77,13 @@ One can invoke this (if it's in the file release.nix):
 nix-build -L -f ./release.nix
 ```
 
+## Custom packages
+
+`er-nix.pkgs` provides some additional packages not available in the standard nixpkgs.  These may be useful in your own development configurations:
+
+* [`haskell-nix`](https://input-output-hk.github.io/haskell.nix/)
+* [`okta-aws-login`](https://github.com/saksdirect/okta-aws-login)
+
 ## Development
 
 ### Updating sources
