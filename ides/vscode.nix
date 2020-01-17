@@ -1,7 +1,7 @@
 { pkgs, additionalExtensions ? [], ... }:
 
 let
-  hie-bios = import ./hie-bios.nix;
+  hie = import ./hie.nix;
   dhall-lsp-server = (import ./dhall-lsp-server.nix) { inherit (pkgs) runCommand; };
   vscodeOverlay = pkgs.vscode-with-extensions.override {
     vscodeExtensions = with pkgs.vscode-extensions; [
@@ -41,5 +41,5 @@ pkgs.runCommand "${wrappedPkgName}-with-extensions-with-deps-${wrappedPkgVersion
   dontStrip = true;
   meta = vscodeOverlay.meta;
 } ''
-  makeWrapper "${vscodeOverlay}/bin/${executableName}" "$out/bin/${executableName}" --prefix PATH : ${pkgs.lib.makeBinPath [ hie-bios dhall-lsp-server pkgs.stack pkgs.cabal-install ] }
+  makeWrapper "${vscodeOverlay}/bin/${executableName}" "$out/bin/${executableName}" --prefix PATH : ${pkgs.lib.makeBinPath [ hie dhall-lsp-server pkgs.stack pkgs.cabal-install ] }
 ''
