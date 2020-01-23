@@ -1,4 +1,1 @@
-with (import ./. {});
-
-# Build nix-tools in CI
-pkgs.haskell-nix.nix-tools
+(import ./.).pkgs.haskell-nix.nix-tools
