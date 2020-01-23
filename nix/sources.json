@@ -70,17 +70,5 @@
         "type": "tarball",
         "url": "https://github.com/hercules-ci/pre-commit-hooks.nix/archive/5c3078ad58856ce22f883b5518879d27bfc59dd5.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "stackage": {
-        "branch": "master",
-        "description": "Automatically generated Nix expressions of Stackage snapshots",
-        "homepage": "",
-        "owner": "fiadliel",
-        "repo": "stackage.nix",
-        "rev": "26ec9addfc87af0a0ce9ed00735e8e6f6413accc",
-        "sha256": "183wmcfl39szlcvkapg3fwsjw28pph5bwlsldj7bjsyfkrm7959n",
-        "type": "tarball",
-        "url": "https://github.com/fiadliel/stackage.nix/archive/26ec9addfc87af0a0ce9ed00735e8e6f6413accc.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
