@@ -13,6 +13,6 @@ jobs:
     - uses: cachix/install-nix-action@v6
     - uses: cachix/cachix-action@v3
       with:
-        name: earnestresearch-oss
-        signingKey: '${{ secrets.OSS_CACHIX_SIGNING_KEY }}'
+        name: earnestresearch-public
+        signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
         file: ci.nix
