@@ -1,6 +1,7 @@
+{ ghc }:
 with (import ./.);
 
 {
   nix-tools = pkgs.haskell-nix.nix-tools;
-  inherit (pkgs.haskell-nix.compiler) ghc865;
+  ghc = builtins.getAttr ghc pkgs.haskell-nix.compiler;
 }
