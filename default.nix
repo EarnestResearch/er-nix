@@ -18,7 +18,5 @@ rec {
   # All the haskell.nix overlays plus all the er-nix overlays.
   overlays = haskell-nix.overlays ++ (import ./overlays);
 
-  ides = import ./ides;
-
   inherit (import sources.niv {}) niv;
 }
