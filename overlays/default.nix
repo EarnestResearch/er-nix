@@ -4,4 +4,5 @@
   (import ./eksctl.nix)
   (import ./custom-packages.nix)
   (import ./earnestresearch.nix)
+  (import ./ghcide.nix)
 ]
