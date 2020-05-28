@@ -18,5 +18,4 @@ jobs:
       with:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-        nixBuildArgs: --argstr ghc ${{ matrix.ghc }}
-    - run: nix-build ci.nix
+    - run: nix-build ci.nix --argstr ghc ${{ matrix.ghc }}
