@@ -3,19 +3,61 @@ name: Test
 on: [push]
 
 jobs:
-  tests:
-    strategy:
-      matrix:
-        os: [macos-latest, ubuntu-latest]
-        ghc: [ ghc865, ghc883 ]
-    runs-on: ${{ matrix.os }}
+  cache-nix-tools-macos:
+    runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v1
-    - uses: cachix/install-nix-action@releases/v9
+    - uses: actions/checkout@v2
+    - uses: cachix/install-nix-action@v10
       with:
         skip_adding_nixpkgs_channel: true
     - uses: cachix/cachix-action@v6
       with:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: nix-build ci.nix --argstr ghc ${{ matrix.ghc }}
+    - run: nix-build ci-nix-tools.nix
+  cache-cabal-macos:
+    needs: cache-nix-tools-macos
+    strategy:
+      matrix:
+        ghc: [ghc883, ghc865]
+      fail-fast: false
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: cachix/install-nix-action@v10
+      with:
+        skip_adding_nixpkgs_channel: true
+    - uses: cachix/cachix-action@v6
+      with:
+        name: earnestresearch-public
+        signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
+    - run: nix-build ci-cabal.nix --argstr ghc ${{ matrix.ghc }}
+  cache-nix-tools-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: cachix/install-nix-action@v10
+      with:
+        skip_adding_nixpkgs_channel: true
+    - uses: cachix/cachix-action@v6
+      with:
+        name: earnestresearch-public
+        signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
+    - run: nix-build ci-nix-tools.nix
+  cache-cabal-linux:
+    needs: cache-nix-tools-linux
+    strategy:
+      matrix:
+        ghc: [ghc883, ghc865]
+      fail-fast: false
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: cachix/install-nix-action@v10
+      with:
+        skip_adding_nixpkgs_channel: true
+    - uses: cachix/cachix-action@v6
+      with:
+        name: earnestresearch-public
+        signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
+    - run: nix-build ci-cabal.nix --argstr ghc ${{ matrix.ghc }}
