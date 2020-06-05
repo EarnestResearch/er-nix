@@ -3,15 +3,31 @@ name: Test
 on: [push]
 
 jobs:
-  tests:
+  cache-macos:
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
-        ghc: [ ghc865, ghc883 ]
-    runs-on: ${{ matrix.os }}
+        ghc: [ghc883, ghc865]
+      fail-fast: false
+    runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v1
-    - uses: cachix/install-nix-action@releases/v9
+    - uses: actions/checkout@v2
+    - uses: cachix/install-nix-action@v10
+      with:
+        skip_adding_nixpkgs_channel: true
+    - uses: cachix/cachix-action@v6
+      with:
+        name: earnestresearch-public
+        signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
+    - run: nix-build ci.nix --argstr ghc ${{ matrix.ghc }}
+  cache-linux:
+    strategy:
+      matrix:
+        ghc: [ghc883, ghc865]
+      fail-fast: false
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: cachix/install-nix-action@v10
       with:
         skip_adding_nixpkgs_channel: true
     - uses: cachix/cachix-action@v6
