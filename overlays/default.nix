@@ -5,4 +5,5 @@
   (import ./custom-packages.nix)
   (import ./earnestresearch.nix)
   (import ./ghcide.nix)
+  (import ./pantry.nix)
 ]
