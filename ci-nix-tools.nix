@@ -1,4 +1,4 @@
 with (import ./.);
 {
-  nix-tools = pkgs.haskell-nix.nix-tools;
+  nix-tools = pkgs.buildPackages.haskell-nix.nix-tools;
 }
