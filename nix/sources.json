@@ -12,15 +12,15 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "haskell-nix": {
-        "branch": "hkm/haddock-pkgconfig",
+        "branch": "master",
         "description": "Alternative Haskell Infrastructure for Nixpkgs",
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "ac822639dd6000ab628f29ab3c5de6238db293b5",
-        "sha256": "026dkaif8yx2idv3x041rfzwndry3gx1vhdm8674y5x73s0jy0pf",
+        "rev": "47f0cded18280e6e242a4548cd4cce7942200acc",
+        "sha256": "0lk0i7i1a492iinlb0ppn2h65l2krvg9hp8j5bv4xwdh08zns8l1",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/ac822639dd6000ab628f29ab3c5de6238db293b5.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/47f0cded18280e6e242a4548cd4cce7942200acc.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {
