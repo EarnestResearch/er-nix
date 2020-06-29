@@ -16,4 +16,6 @@ in
   };
 
   inherit (pre-commit-hooks) hlint nixpkgs-fmt ormolu;
+
+  inherit pre-commit-hooks;
 }
