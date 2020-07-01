@@ -1,1 +1,1 @@
-../common/shell.nix
+import ../common/shell.nix
