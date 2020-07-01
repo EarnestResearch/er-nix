@@ -24,6 +24,10 @@ jobs:
 
   cache-linux-haskell-nix-roots:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        pkgs: [ pkgs, pkgs.pkgsCross.musl64 ]
+      fail-fast: false
     steps:
     - uses: actions/checkout@v2
     - uses: cachix/install-nix-action@v10
@@ -33,10 +37,14 @@ jobs:
       with:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: nix-build -E "(import ./.).pkgs.haskell-nix.haskellNixRoots"
+    - run: nix-build -E "(import ./.).${{ matrix.pkgs }}.haskell-nix.haskellNixRoots"
 
   cache-macos-haskell-nix-roots:
     runs-on: macos-latest
+    strategy:
+      matrix:
+        pkgs: [ pkgs, pkgs.pkgsCross.musl64 ]
+      fail-fast: false
     steps:
     - uses: actions/checkout@v2
     - uses: cachix/install-nix-action@v10
@@ -46,7 +54,7 @@ jobs:
       with:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: nix-build -E "(import ./.).pkgs.haskell-nix.haskellNixRoots"
+    - run: nix-build -E "(import ./.).${{ matrix.pkgs }}.haskell-nix.haskellNixRoots"
 
   cache-linux-ghc:
     needs: cache-linux-haskell-nix-roots
@@ -54,6 +62,7 @@ jobs:
     strategy:
       matrix:
         ghc: [ ghc865, ghc883, ghc8101 ]
+        pkgs: [ pkgs, pkgs.pkgsCross.musl64 ]
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
@@ -64,7 +73,7 @@ jobs:
       with:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: nix-build -E "(import ./.).pkgs.buildPackages.haskell-nix.compiler.${{ matrix.ghc }}"
+    - run: nix-build -E "(import ./.).${{ matrix.pkgs }}.buildPackages.haskell-nix.compiler.${{ matrix.ghc }}"
 
   cache-macos-ghc:
     needs: cache-macos-haskell-nix-roots
@@ -72,6 +81,7 @@ jobs:
     strategy:
       matrix:
         ghc: [ ghc865, ghc883, ghc8101 ]
+        pkgs: [ pkgs, pkgs.pkgsCross.musl64 ]
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
@@ -82,7 +92,7 @@ jobs:
       with:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: nix-build -E "(import ./.).pkgs.buildPackages.haskell-nix.compiler.${{ matrix.ghc }}"
+    - run: nix-build -E "(import ./.).${{ matrix.pkgs }}.buildPackages.haskell-nix.compiler.${{ matrix.ghc }}"
 
   cache-linux-projects:
     needs: cache-linux-ghc
