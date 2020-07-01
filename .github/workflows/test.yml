@@ -3,26 +3,13 @@ name: Test
 on: [push]
 
 jobs:
-  cache-nix-tools-macos:
-    runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: cachix/install-nix-action@v10
-      with:
-        skip_adding_nixpkgs_channel: true
-    - uses: cachix/cachix-action@v6
-      with:
-        name: earnestresearch-public
-        signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: cachix use pre-commit-hooks
-    - run: nix-build ci-nix-tools.nix
-  cache-cabal-macos:
-    needs: cache-nix-tools-macos
+
+  cache-precommit:
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        ghc: [ghc883, ghc865]
+        os: [ ubuntu-latest, macos-latest ]
       fail-fast: false
-    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
     - uses: cachix/install-nix-action@v10
@@ -33,8 +20,9 @@ jobs:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
     - run: cachix use pre-commit-hooks
-    - run: nix-build ci-cabal.nix --argstr ghc ${{ matrix.ghc }}
-  cache-nix-tools-linux:
+    - run: nix-build -E "(import ./.).pkgs.pre-commit-hooks"
+
+  cache-linux-haskell-nix-roots:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -45,15 +33,10 @@ jobs:
       with:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: cachix use pre-commit-hooks
-    - run: nix-build ci-nix-tools.nix
-  cache-cabal-linux:
-    needs: cache-nix-tools-linux
-    strategy:
-      matrix:
-        ghc: [ghc883, ghc865]
-      fail-fast: false
-    runs-on: ubuntu-latest
+    - run: nix-build -E "(import ./.).pkgs.haskell-nix.haskellNixRoots"
+
+  cache-macos-haskell-nix-roots:
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
     - uses: cachix/install-nix-action@v10
@@ -63,5 +46,76 @@ jobs:
       with:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: cachix use pre-commit-hooks
-    - run: nix-build ci-cabal.nix --argstr ghc ${{ matrix.ghc }}
+    - run: nix-build -E "(import ./.).pkgs.haskell-nix.haskellNixRoots"
+
+  cache-linux-ghc:
+    needs: cache-linux-haskell-nix-roots
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ghc: [ ghc865, ghc883, ghc8101 ]
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v2
+    - uses: cachix/install-nix-action@v10
+      with:
+        skip_adding_nixpkgs_channel: true
+    - uses: cachix/cachix-action@v6
+      with:
+        name: earnestresearch-public
+        signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
+    - run: nix-build -E "(import ./.).pkgs.buildPackages.haskell-nix.compiler.${{ matrix.ghc }}"
+
+  cache-macos-ghc:
+    needs: cache-macos-haskell-nix-roots
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        ghc: [ ghc865, ghc883, ghc8101 ]
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v2
+    - uses: cachix/install-nix-action@v10
+      with:
+        skip_adding_nixpkgs_channel: true
+    - uses: cachix/cachix-action@v6
+      with:
+        name: earnestresearch-public
+        signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
+    - run: nix-build -E "(import ./.).pkgs.buildPackages.haskell-nix.compiler.${{ matrix.ghc }}"
+
+  cache-linux-projects:
+    needs: cache-linux-ghc
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        name: [ lts14, lts15, lts16 ]
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v2
+    - uses: cachix/install-nix-action@v10
+      with:
+        skip_adding_nixpkgs_channel: true
+    - uses: cachix/cachix-action@v6
+      with:
+        name: earnestresearch-public
+        signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
+    - run: cd test/${{ matrix.name }} && nix-shell --run "exit 0"
+
+  cache-macos-projects:
+    needs: cache-macos-ghc
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        name: [ lts14, lts15, lts16 ]
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v2
+    - uses: cachix/install-nix-action@v10
+      with:
+        skip_adding_nixpkgs_channel: true
+    - uses: cachix/cachix-action@v6
+      with:
+        name: earnestresearch-public
+        signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
+    - run: cd test/${{ matrix.name }} && nix-shell --run "exit 0"
