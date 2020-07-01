@@ -1,6 +1,7 @@
+{ buildMusl }:
 let
   pkgs = (import ../../default.nix).pkgs;
-  hsPkgs = import ./default.nix { inherit pkgs; };
+  hsPkgs = import ./default.nix { inherit pkgs buildMusl; };
 in
 hsPkgs.shellFor {
   tools = {

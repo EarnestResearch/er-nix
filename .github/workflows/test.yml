@@ -100,6 +100,7 @@ jobs:
     strategy:
       matrix:
         name: [ lts14, lts15, lts16 ]
+        buildMusl: [ true, false ]
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
@@ -110,7 +111,7 @@ jobs:
       with:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: cd test/${{ matrix.name }} && nix-shell --run "exit 0"
+    - run: cd test/${{ matrix.name }} && nix-shell --run "exit 0" --arg buildMusl '${{ matrix.buildMusl }}'
 
   cache-macos-projects:
     needs: cache-macos-ghc
@@ -118,6 +119,7 @@ jobs:
     strategy:
       matrix:
         name: [ lts14, lts15, lts16 ]
+        buildMusl: [ true, false ]
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
@@ -128,4 +130,4 @@ jobs:
       with:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: cd test/${{ matrix.name }} && nix-shell --run "exit 0"
+    - run: cd test/${{ matrix.name }} && nix-shell --run "exit 0" --arg buildMusl '${{ matrix.buildMusl }}'
