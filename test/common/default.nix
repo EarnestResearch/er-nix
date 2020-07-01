@@ -5,5 +5,5 @@ let
   crossPkgs = if buildMusl then pkgs.pkgsCross.musl64 else pkgs;
 in
 pkgs.haskell-nix.project {
-  src = crossPkgs.haskell-nix.haskellLib.cleanGit { src = ./.; };
+  src = pkgs.haskell-nix.haskellLib.cleanSourceWith { src = ./.; };
 }
