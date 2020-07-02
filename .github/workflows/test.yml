@@ -54,6 +54,7 @@ jobs:
       with:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
+    - run: launchctl limit maxfiles 100000 100000
     - run: nix-build -E "(import ./.).${{ matrix.pkgs }}.haskell-nix.haskellNixRoots"
 
   cache-linux-ghc:
