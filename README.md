@@ -77,6 +77,24 @@ One can invoke this (if it's in the file release.nix):
 nix-build -L -f ./release.nix
 ```
 
+## Cabal utilities
+
+Load in your `shell.nix`
+
+```nix
+let
+  hsPkgs = import ./default.nix { inherit pkgs; };
+  cabalProject = pkgs.earnestresearch.lib.cabal.project hsPkgs "your-project-name";
+```
+
+and then add `cabal new-run` shell wrappers for all executables defined in your project with
+
+```nix
+  buildInputs = with pkgs; [
+  ...other stuff...
+  ] ++ cabalProject.projectApps;
+```
+
 ## Custom packages
 
 `er-nix.pkgs` provides some additional packages not available in the standard nixpkgs.  These may be useful in your own development configurations:
