@@ -43,7 +43,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        pkgs: [ pkgs, pkgs.pkgsCross.musl64 ]
+        pkgs: [ pkgs ]
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
@@ -81,7 +81,7 @@ jobs:
     strategy:
       matrix:
         ghc: [ ghc865, ghc883, ghc8101 ]
-        pkgs: [ pkgs, pkgs.pkgsCross.musl64 ]
+        pkgs: [ pkgs ]
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
@@ -119,7 +119,7 @@ jobs:
     strategy:
       matrix:
         name: [ lts14, lts15, lts16 ]
-        buildMusl: [ true, false ]
+        buildMusl: [ false ]
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
