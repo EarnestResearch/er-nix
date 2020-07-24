@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.31.2.
+-- This file has been generated from package.yaml by hpack version 0.33.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 29982b8ea7d716f1644d9e83223bac515a426d913b8bcdd3d903f5119adf112c
+-- hash: 2f81468561f6902a382b3b449e9f3ec6c12a4e6cc4365a55a6ecebfad9db594b
 
 name:           lts16
 version:        0.1.0.0
@@ -34,6 +34,9 @@ library
       src
   build-depends:
       base >=4.7 && <5
+    , lens
+    , rio
+    , servant-server
   default-language: Haskell2010
 
 executable lts16-exe
@@ -45,7 +48,10 @@ executable lts16-exe
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , lens
     , lts16
+    , rio
+    , servant-server
   default-language: Haskell2010
 
 test-suite lts16-test
@@ -58,5 +64,8 @@ test-suite lts16-test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , lens
     , lts16
+    , rio
+    , servant-server
   default-language: Haskell2010
