@@ -5,9 +5,10 @@
     hsPkgs = import ./default.nix { inherit pkgs; };
     cabalProject = pkgs.earnestresearch.lib.cabal.project hsPkgs "your-project-name";
 */
-{ ghc, writeScriptBin, hsPkgs, projectName }:
+{ writeScriptBin, hsPkgs, projectName }:
 
 let
+  ghc = (hsPkgs.shellFor{}).ghc; # get ghc from project's shell
   earnestProject = builtins.getAttr projectName hsPkgs;
   cabalSystem = builtins.replaceStrings [ "darwin" ] [ "osx" ] builtins.currentSystem; # cabal's convention
 
