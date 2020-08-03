@@ -8,12 +8,12 @@
 { writeScriptBin, hsPkgs, projectName }:
 
 let
-  ghc = (hsPkgs.shellFor{}).ghc; # get ghc from project's shell
   earnestProject = builtins.getAttr projectName hsPkgs;
+  ghcVersion = earnestProject.project.pkg-set.config.ghc.package.version;
   cabalSystem = builtins.replaceStrings [ "darwin" ] [ "osx" ] builtins.currentSystem; # cabal's convention
 
   # See notes about LD_LIBRARY_PATH below
-  localLdLibPath = "$(pwd)/dist-newstyle/build/${cabalSystem}/ghc-${ghc.version}/${projectName}-${earnestProject.components.library.version}/noopt/build";
+  localLdLibPath = "$(pwd)/dist-newstyle/build/${cabalSystem}/ghc-${ghcVersion}/${projectName}-${earnestProject.components.library.version}/noopt/build";
 
   # Platform dependent runtime linker config to allow for fully shared (including haskell libs) builds
   # during development (faster build times)
