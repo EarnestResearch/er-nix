@@ -10,7 +10,7 @@ in
 
     lib = {
       docker.upload-to-aws = super.callPackage ../lib/docker/upload-to-aws;
-      cabal.project = hsPkgs: projectName: super.callPackage ../lib/cabal/project.nix { hsPkgs = hsPkgs; projectName = projectName; };
+      cabal.project = earnestProject: super.callPackage ../lib/cabal/project.nix { earnestProject = earnestProject; };
     };
 
     pre-commit-check = import ../pre-commit-check;

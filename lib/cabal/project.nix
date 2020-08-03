@@ -3,12 +3,22 @@
    Example call from your shell.nix:
 
     hsPkgs = import ./default.nix { inherit pkgs; };
-    cabalProject = pkgs.earnestresearch.lib.cabal.project hsPkgs "your-project-name";
+    cabalProject = pkgs.earnestresearch.lib.cabal.project hsPkgs.your-project;
+
+   and then you can use
+
+    buildInputs = [ ... stuff ... ] ++ cabalProject.projectApps;
+
+   and/or
+    export ${cabalProject.ldEnvVar}
+   in your shellHook to configure your dynamic linker to "see"
+   project's library even if you are not running commands via
+   supplied "wrapper" scripts.
 */
-{ writeScriptBin, hsPkgs, projectName }:
+{ writeScriptBin, earnestProject }:
 
 let
-  earnestProject = builtins.getAttr projectName hsPkgs;
+  projectName = earnestProject.identifier.name;
   ghcVersion = earnestProject.project.pkg-set.config.ghc.package.version;
   cabalSystem = builtins.replaceStrings [ "darwin" ] [ "osx" ] builtins.currentSystem; # cabal's convention
 
