@@ -3,16 +3,28 @@
    Example call from your shell.nix:
 
     hsPkgs = import ./default.nix { inherit pkgs; };
-    cabalProject = pkgs.earnestresearch.lib.cabal.project hsPkgs "your-project-name";
+    cabalProject = pkgs.earnestresearch.lib.cabal.project hsPkgs.your-project;
+
+   and then you can use
+
+    buildInputs = [ ... stuff ... ] ++ cabalProject.projectApps;
+
+   and/or
+    export ${cabalProject.ldEnvVar}
+   in your shellHook to configure your dynamic linker to "see"
+   project's library even if you are not running commands via
+   supplied "wrapper" scripts.
 */
-{ ghc, writeScriptBin, hsPkgs, projectName }:
+{ writeScriptBin, earnestProject }:
 
 let
-  earnestProject = builtins.getAttr projectName hsPkgs;
+  projectName = earnestProject.identifier.name;
+  projectVersion = earnestProject.identifier.version;
+  ghcVersion = earnestProject.project.pkg-set.config.ghc.package.version;
   cabalSystem = builtins.replaceStrings [ "darwin" ] [ "osx" ] builtins.currentSystem; # cabal's convention
 
   # See notes about LD_LIBRARY_PATH below
-  localLdLibPath = "$(pwd)/dist-newstyle/build/${cabalSystem}/ghc-${ghc.version}/${projectName}-${earnestProject.components.library.version}/noopt/build";
+  localLdLibPath = "$(pwd)/dist-newstyle/build/${cabalSystem}/ghc-${ghcVersion}/${projectName}-${projectVersion}/noopt/build";
 
   # Platform dependent runtime linker config to allow for fully shared (including haskell libs) builds
   # during development (faster build times)
