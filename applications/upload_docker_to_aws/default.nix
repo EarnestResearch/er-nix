@@ -6,12 +6,6 @@ writeShellScriptBin "upload_docker_to_aws"
     set -o errtrace
     set -o pipefail
 
-    # Enable debugging in CI environment
-    # Note that this'll leak sensitive tokens to logs and should not be left enabled
-    if [ -n "$DEBUG" ] ; then
-       set -o xtrace
-    fi
-
     export AWS_CONTAINER_CREDENTIALS_RELATIVE_URI="${builtins.getEnv "AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"}"
     export AWS_DEFAULT_REGION="${builtins.getEnv "AWS_DEFAULT_REGION"}"
     export AWS_REGION="${builtins.getEnv "AWS_REGION"}"
