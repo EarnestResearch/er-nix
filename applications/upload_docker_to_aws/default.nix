@@ -58,13 +58,13 @@ writeShellScriptBin "upload_docker_to_aws"
       exit 1
     fi
 
-    AUTH=''$(${awscli}/bin/aws ecr get-authorization-token --output text --query 'authorizationData[]')
+    AUTH=$(${awscli}/bin/aws ecr get-authorization-token --output text --query 'authorizationData[]')
 
     TOKEN=$( ${coreutils}/bin/echo $AUTH | ${gawk}/bin/awk '{ print $1 }' | ${coreutils}/bin/base64 -d | ${coreutils}/bin/cut -d: -f2 )
     DOCKER_HOST=$( ${coreutils}/bin/echo $AUTH | ${gawk}/bin/awk '{ print $3 }' | cut -d/ -f3 )
     DOCKER_URL="$DOCKER_HOST/$NAME:$TAG"
 
-    ${skopeo}/bin/skopeo copy "--dest-creds=AWS:$TOKEN" "docker-archive:$1" "docker://$DOCKER_URL" >&2
+    ${skopeo}/bin/skopeo copy --retry-times 5 --insecure-policy "--dest-creds=AWS:$TOKEN" "docker-archive:$1" "docker://$DOCKER_URL" >&2
 
     ${coreutils}/bin/echo "$DOCKER_URL"
   ''
