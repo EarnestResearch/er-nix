@@ -1,0 +1,11 @@
+--- a/vendor/github.com/containers/image/v5/pkg/tlsclientconfig/tlsclientconfig.go
++++ b/vendor/github.com/containers/image/v5/pkg/tlsclientconfig/tlsclientconfig.go
+@@ -100,7 +100,7 @@ func NewTransport() *http.Transport {
+ 	tr := &http.Transport{
+ 		Proxy:               http.ProxyFromEnvironment,
+ 		DialContext:         direct.DialContext,
+-		TLSHandshakeTimeout: 10 * time.Second,
++		TLSHandshakeTimeout: 30 * time.Second,
+ 		// TODO(dmcgowan): Call close idle connections when complete and use keep alive
+ 		DisableKeepAlives: true,
+ 	}
