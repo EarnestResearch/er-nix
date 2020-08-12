@@ -100,7 +100,7 @@ and then add `cabal new-run` shell wrappers for all executables defined in your 
 `er-nix.pkgs` provides some additional packages not available in the standard nixpkgs.  These may be useful in your own development configurations:
 
 * [`haskell-nix`](https://input-output-hk.github.io/haskell.nix/)
-* [`okta-aws-login`](https://github.com/saksdirect/okta-aws-login)
+* [`okta-aws-login`](https://github.com/EarnestResearch/okta-aws-login)
 
 ## Development
 

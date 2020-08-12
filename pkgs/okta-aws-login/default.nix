@@ -2,7 +2,7 @@
 
 let
   version = "1.3.2";
-  urlTemplate = arch: "https://github.com/saksdirect/okta-aws-login/releases/download/v${version}/okta-aws-login-${arch}";
+  urlTemplate = arch: "https://github.com/EarnestResearch/okta-aws-login/releases/download/v${version}/okta-aws-login-${arch}";
   sources = {
     x86_64-linux = fetchurl {
       url = urlTemplate "Linux-x86_64";
