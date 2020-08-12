@@ -59,6 +59,18 @@
         "url": "https://github.com/NixOS/nixpkgs/archive/b331c72f032389c7156ff1d30117f91c95bbeedb.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "okta-aws-login": {
+        "branch": "master",
+        "description": "CLI login to AWS and ECR with Okta (SAML)",
+        "homepage": null,
+        "owner": "EarnestResearch",
+        "repo": "okta-aws-login",
+        "rev": "4793669976009fbca3187a447f1523757794a17a",
+        "sha256": "06l0q18vw0g8bwd2x25v9i7vdmb4g00xwci2cs0vnals8hl3xv8s",
+        "type": "tarball",
+        "url": "https://github.com/EarnestResearch/okta-aws-login/archive/4793669976009fbca3187a447f1523757794a17a.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "pre-commit-hooks": {
         "branch": "master",
         "description": "Seamless integration of https://pre-commit.com git hooks with Nix.",

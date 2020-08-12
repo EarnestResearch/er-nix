@@ -2,6 +2,42 @@
 
 Common Nix code for Earnest Research
 
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [er-nix](#er-nix)
+    - [Installing our development tools](#installing-our-development-tools)
+    - [Quick start](#quick-start)
+        - [`nixpkgs/default.nix`](#nixpkgsdefaultnix)
+        - [`default.nix`](#defaultnix)
+        - [Cross-system builds](#cross-system-builds)
+    - [Building Docker images](#building-docker-images)
+    - [Cabal utilities](#cabal-utilities)
+    - [Custom packages](#custom-packages)
+    - [Development](#development)
+        - [Updating sources](#updating-sources)
+
+<!-- markdown-toc end -->
+
+## Installing our development tools
+
+This is a way to share our development tools with all developers via a custom nix channel.
+
+Make sure `~/.nix-profile/bin` is in your `PATH`.
+
+Add this repository as a nix channel:
+
+```bash
+$ nix-channel --add  https://github.com/EarnestResearch/er-nix/archive/master.tar.gz er-nix
+```
+(or verify you have it already with `nix-channel --list`)
+
+Use it to install our packages, e.g.
+```bash
+$ nix-channel --update
+$ nix-env -f '<er-nix>' -i  -A 'pkgs.okta-aws-login'
+```
+
 ## Quick start
 
 ### `nixpkgs/default.nix`
