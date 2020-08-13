@@ -40,6 +40,13 @@ $ nix-channel --update
 $ nix-env -f '<er-nix>' -i  -A 'pkgs.okta-aws-login'
 ```
 
+To keep up with new releases:
+
+```bash
+$ nix-channel --update
+$ nix-env --upgrade
+```
+
 ## Quick start
 
 ### `nixpkgs/default.nix`
