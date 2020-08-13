@@ -21,6 +21,8 @@ Common Nix code for Earnest Research
 
 ## Installing our development tools
 
+If you are a nix enthusiast / power user please take a look at [Nix Home Manager](https://nixos.wiki/wiki/Home_Manager), otherwise read on for a simple setup.
+
 This is a way to share our development tools with all developers via a custom nix channel.
 
 Make sure `~/.nix-profile/bin` is in your `PATH`.
