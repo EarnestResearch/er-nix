@@ -6,8 +6,17 @@ rec {
   # A pinned version of nixpkgs, widely used and hopefully well cached.
   defaultNixpkgs = import sources.nixpkgs;
 
+  # A package set from `defaultNixpkgs`, merging `args` into `nixpkgsArgs`.
+  # Convenient for introducing a local overlay.
+  #
+  #   myOverlay = self: super: { ... };
+  #   erNix.pkgsWith {
+  #     overlays = erNix.overlays ++ [ myOverlay ];
+  #   };
+  pkgsWith = args: defaultNixpkgs (nixpkgsArgs // args);
+
   # A package set for the specified system, based on `defaultNixpkgs` with all overlays applied.
-  pkgsForSystem = system: defaultNixpkgs (nixpkgsArgs // { inherit system; });
+  pkgsForSystem = system: pkgsWith { inherit system; };
 
   # `pkgsForSystem` for the current system.
   pkgs = pkgsForSystem builtins.currentSystem;
