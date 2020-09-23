@@ -11,6 +11,18 @@
         "url": "https://github.com/infinisil/all-hies/archive/534ac517b386821b787d1edbd855b9966d0c0775.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "haskell-language-server": {
+        "branch": "0.4.0",
+        "description": "Integration point for ghcide and haskell-ide-engine. One IDE to rule them all.",
+        "homepage": null,
+        "owner": "haskell",
+        "repo": "haskell-language-server",
+        "rev": "0a18edde24923251a148cbbc0ae993a6aac83b9c",
+        "sha256": "0b94l6bywa6jk20y2cswyq5ks4g515895k2apvr1mdfkfhngdb7b",
+        "type": "tarball",
+        "url": "https://github.com/haskell/haskell-language-server/archive/0a18edde24923251a148cbbc0ae993a6aac83b9c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "haskell-nix": {
         "branch": "master",
         "description": "Alternative Haskell Infrastructure for Nixpkgs",
@@ -33,6 +45,18 @@
         "sha256": "0dplsk4sak4fw2hhw2rajg0pymvhs3m88gzpzqvhhnmzvfl3ki59",
         "type": "tarball",
         "url": "https://github.com/nmattia/niv/archive/24eabfbfaa74117d66fa27463a90b237b1b01746.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nix-hls": {
+        "branch": "master",
+        "description": "Nix builds of Haskell Language Server",
+        "homepage": null,
+        "owner": "shajra",
+        "repo": "nix-hls",
+        "rev": "ab7f2a16174db741d7525dd61e68b3f8f8e926b3",
+        "sha256": "01ganaqf9gg7a1dw1snhkq4dmfwxln6jhdig3iq1q7slcfdqlrg2",
+        "type": "tarball",
+        "url": "https://github.com/shajra/nix-hls/archive/ab7f2a16174db741d7525dd61e68b3f8f8e926b3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
