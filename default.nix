@@ -28,4 +28,11 @@ rec {
   overlays = haskell-nix.overlays ++ (import ./overlays);
 
   inherit (import sources.niv {}) niv;
+
+  tools = {
+    haskell-language-server =
+      pkgs.callPackage ./tools/haskell-language-server {
+        inherit sources;
+      };
+  };
 }

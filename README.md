@@ -147,6 +147,30 @@ and then add `cabal new-run` shell wrappers for all executables defined in your 
 * [`haskell-nix`](https://input-output-hk.github.io/haskell.nix/)
 * [`okta-aws-login`](https://github.com/EarnestResearch/okta-aws-login)
 
+## Tools
+
+We also add some development tools in `er-nix.tools`.
+One reason they're distinct from packages is that they may require arguments to configure.
+`pkgs.haskell-nix.tool` provides a lot, so this is mainly a holding area for things that aren't yet there.
+
+### haskell-language-server
+
+[Haskell Language Server](https://github.com/haskell/haskell-language-server) is a language server implementation that should work in any editor with an LSP client.
+It must be compiled with the same version of `ghc` as used by the project.
+The one provided here is sourced with our `haskell.nix`, and should work well with any of our `haskell.nix` projects.
+The nix name of the GHC compiler must be provided as an argument.
+To add it to your `shell.nix`:
+
+```nix
+let
+  compiler-nix-name = hsPkgs.earnest-project.project.pkg-set.options.compiler.nix-name.value;
+  hls = er-nix.tools.haskell-language-server compiler-nix-name;
+in
+hsPkgs.shellFor {
+  buildInputs = [ ... ] ++ builtins.attrValues hls;
+}
+```
+
 ## Development
 
 ### Updating sources
