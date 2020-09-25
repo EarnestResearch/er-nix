@@ -1,16 +1,18 @@
 { fetchFromGitHub
-, haskell-nix
-, lib
 , sources
 }:
 
+{ project
+, # We can't infer this, which is fine as long as we're using a hashed
+  # one.  We're just overriding nix-hls' pin here so haskell.nix looks
+  # it up in its own indexStateHashesPath.
+  index-sha256 ? null
+}:
 let
-  index-state-hashes = import haskell-nix.indexStateHashesPath;
+  ghcVersion = project.project.pkg-set.options.compiler.nix-name.value;
+  index-state = project.project.index-state;
 in
-{ ghcVersion
-, index-state ? lib.last (builtins.attrNames index-state-hashes)
-, index-sha256 ? null
-}: import sources.nix-hls {
+import sources.nix-hls {
   inherit ghcVersion index-state index-sha256;
   sources = {
     # This has a submodule, which niv doesn't yet handle.

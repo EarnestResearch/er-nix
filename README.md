@@ -157,24 +157,18 @@ One reason they're distinct from packages is that they may require arguments to 
 
 [Haskell Language Server](https://github.com/haskell/haskell-language-server) is a language server implementation that should work in any editor with an LSP client.
 It must be compiled with the same version of `ghc` as used by the project.
-The one provided here is sourced with our `haskell.nix`, and should work well with any of our `haskell.nix` projects.
-The nix name of the GHC compiler must be provided as an argument.
+We provide a function here to build HLS binaries for your `haskell.nix` project.
+The nix name of your GHC and the Hackage index state are inferred from the project.
 To add it to your `shell.nix`:
 
 ```nix
 let
-  compiler-nix-name = hsPkgs.earnest-project.project.pkg-set.options.compiler.nix-name.value;
-  hls = er-nix.tools.haskell-language-server {
-    ghcVersion = compiler-nix-name;
-  };
+  hls = er-nix.tools.haskell-language-server { project = hsPkgs.earnest-project };
 in
 hsPkgs.shellFor {
   buildInputs = [ ... ] ++ builtins.attrValues hls;
 }
 ```
-
-`haskell-language-server` also accepts `index-state` and `index-sha256` arguments that should match your call to `cabalProject`.
-If you didn't specify them in default.nix, you should be able to cheerfully ignore them here.
 
 ## Development
 
