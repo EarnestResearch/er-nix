@@ -1,8 +1,17 @@
-{ fetchFromGitHub,
-  sources }:
+{ fetchFromGitHub
+, haskell-nix
+, lib
+, sources
+}:
 
-ghcVersion: import sources.nix-hls {
-  inherit ghcVersion;
+let
+  index-state-hashes = import haskell-nix.indexStateHashesPath;
+in
+{ ghcVersion
+, index-state ? lib.last (builtins.attrNames index-state-hashes)
+, index-sha256 ? null
+}: import sources.nix-hls {
+  inherit ghcVersion index-state index-sha256;
   sources = {
     # This has a submodule, which niv doesn't yet handle.
     # Note that this also defeats nix-prefetch-git.

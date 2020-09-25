@@ -164,12 +164,17 @@ To add it to your `shell.nix`:
 ```nix
 let
   compiler-nix-name = hsPkgs.earnest-project.project.pkg-set.options.compiler.nix-name.value;
-  hls = er-nix.tools.haskell-language-server compiler-nix-name;
+  hls = er-nix.tools.haskell-language-server {
+    ghcVersion = compiler-nix-name;
+  };
 in
 hsPkgs.shellFor {
   buildInputs = [ ... ] ++ builtins.attrValues hls;
 }
 ```
+
+`haskell-language-server` also accepts `index-state` and `index-sha256` arguments that should match your call to `cabalProject`.
+If you didn't specify them in default.nix, you should be able to cheerfully ignore them here.
 
 ## Development
 
