@@ -30,10 +30,24 @@ let
   fromSource = name: modules:
     let
       planConfig = planConfigFor name modules // {
-        src = sources."${name}";
+        src = sources'."${name}";
       };
     in
       allExes (haskell-nix.cabalProject planConfig)."${name}";
+
+  sources' = {
+    # This has a submodule, which niv doesn't yet handle.
+    # Note that this also defeats nix-prefetch-git.
+    # https://github.com/nmattia/niv/issues/229
+    haskell-language-server =
+      with sources.haskell-language-server;
+      fetchFromGitHub {
+        inherit owner repo rev;
+        name = "haskell-language-server-with-submodules-src";
+        sha256 = "0b94l6bywa6jk20y2cswyq5ks4g515895k2apvr1mdfkfhngdb7b";
+        fetchSubmodules = true;
+      };
+  };
 
   build = fromSource "haskell-language-server"
     [ { enableSeparateDataOutput = true; } ];
