@@ -13,7 +13,10 @@
 }:
 let
   ghcVersion = project.project.pkg-set.options.compiler.nix-name.value;
-  index-state = project.project.index-state;
+  index-state =
+    if builtins.hasAttr "index-state" project
+    then project.index-state
+    else null;
 
   # Most of what follows is inlined https://github.com/shajra/nix-hls.
   # We tried to call it directly, but getting it to use our nixpkgs
