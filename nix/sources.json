@@ -18,7 +18,7 @@
         "owner": "haskell",
         "repo": "haskell-language-server",
         "rev": "0a18edde24923251a148cbbc0ae993a6aac83b9c",
-        "sha256": "0b94l6bywa6jk20y2cswyq5ks4g515895k2apvr1mdfkfhngdb7b",
+        "sha256": "0kvfsj1n6kx1nam3hygbm3rj5y22skfcka85s46yb6b72a23a4fn",
         "type": "tarball",
         "url": "https://github.com/haskell/haskell-language-server/archive/0a18edde24923251a148cbbc0ae993a6aac83b9c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
