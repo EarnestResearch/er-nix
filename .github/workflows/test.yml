@@ -12,7 +12,7 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
-    - uses: cachix/install-nix-action@v10
+    - uses: cachix/install-nix-action@v11
       with:
         skip_adding_nixpkgs_channel: true
     - uses: cachix/cachix-action@v6
@@ -31,7 +31,7 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
-    - uses: cachix/install-nix-action@v10
+    - uses: cachix/install-nix-action@v11
       with:
         skip_adding_nixpkgs_channel: true
     - uses: cachix/cachix-action@v6
@@ -49,7 +49,7 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
-    - uses: cachix/install-nix-action@v10
+    - uses: cachix/install-nix-action@v11
       with:
         skip_adding_nixpkgs_channel: true
     - uses: cachix/cachix-action@v6
@@ -68,7 +68,7 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
-    - uses: cachix/install-nix-action@v10
+    - uses: cachix/install-nix-action@v11
       with:
         skip_adding_nixpkgs_channel: true
     - uses: cachix/cachix-action@v6
@@ -87,7 +87,7 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
-    - uses: cachix/install-nix-action@v10
+    - uses: cachix/install-nix-action@v11
       with:
         skip_adding_nixpkgs_channel: true
     - uses: cachix/cachix-action@v6
@@ -101,35 +101,35 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        name: [ lts14, lts15, lts16 ]
+        ghc: [ ghc865, ghc883, ghc884 ]
         buildMusl: [ true, false ]
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
-    - uses: cachix/install-nix-action@v10
+    - uses: cachix/install-nix-action@v11
       with:
         skip_adding_nixpkgs_channel: true
     - uses: cachix/cachix-action@v6
       with:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: cd test/${{ matrix.name }} && nix-shell --run "exit 0" --arg buildMusl '${{ matrix.buildMusl }}'
+    - run: cd test && nix-shell --run "exit 0" --arg buildMusl '${{ matrix.buildMusl }}' --argstr compiler-nix-name '${{ matrix.ghc }}'
 
   cache-macos-projects:
     needs: cache-macos-ghc
     runs-on: macos-latest
     strategy:
       matrix:
-        name: [ lts14, lts15, lts16 ]
+        ghc: [ ghc865, ghc883, ghc884 ]
         buildMusl: [ false ]
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
-    - uses: cachix/install-nix-action@v10
+    - uses: cachix/install-nix-action@v11
       with:
         skip_adding_nixpkgs_channel: true
     - uses: cachix/cachix-action@v6
       with:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: cd test/${{ matrix.name }} && nix-shell --run "exit 0" --arg buildMusl '${{ matrix.buildMusl }}'
+    - run: cd test && nix-shell --run "exit 0" --arg buildMusl '${{ matrix.buildMusl }}' --argstr compiler-nix-name '${{ matrix.ghc }}'
