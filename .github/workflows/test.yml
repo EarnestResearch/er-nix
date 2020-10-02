@@ -101,7 +101,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ghc: [ ghc865, ghc883, ghc884, ghc8101 ]
+        ghc: [ ghc865, ghc883, ghc884 ]
         buildMusl: [ true, false ]
       fail-fast: false
     steps:
@@ -120,7 +120,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        ghc: [ ghc865, ghc883, ghc884, ghc8101 ]
+        ghc: [ ghc865, ghc883, ghc884 ]
         buildMusl: [ false ]
       fail-fast: false
     steps:
