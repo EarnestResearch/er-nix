@@ -14,6 +14,8 @@ Common Nix code for Earnest Research
     - [Building Docker images](#building-docker-images)
     - [Cabal utilities](#cabal-utilities)
     - [Custom packages](#custom-packages)
+    - [Tools](#tools)
+        - [haskell-language-server](#haskell-language-server)
     - [Development](#development)
         - [Updating sources](#updating-sources)
 
