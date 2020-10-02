@@ -1,5 +1,5 @@
-{ buildMusl
-, compiler-nix-name
+{ buildMusl ? false
+, compiler-nix-name ? "ghc884"
 }:
 let
   er-nix = import ../default.nix;
@@ -10,9 +10,8 @@ in
 hsPkgs.shellFor {
   tools = {
     cabal = "3.2.0.0";
+    hpack = "0.34.2";
   };
 
   buildInputs = builtins.attrValues hls;
-
-  exactDeps = true;
 }
