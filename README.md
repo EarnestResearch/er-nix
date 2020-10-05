@@ -159,18 +159,27 @@ One reason they're distinct from packages is that they may require arguments to 
 
 [Haskell Language Server](https://github.com/haskell/haskell-language-server) is a language server implementation that should work in any editor with an LSP client.
 It must be compiled with the same version of `ghc` as used by the project.
-We provide a function here to build HLS binaries for your `haskell.nix` project.
-The nix name of your GHC and the Hackage index state are inferred from the project.
-To add it to your `shell.nix`:
+We provide a function here to fetch the `haskell-language-server-wrapper` and cached `haskell-language-server` binaries for various Haskell versions.
+To add it to your environment:
+
+```sh
+nix-env -if https://github.com/EarnestResearch/er-nix/tarball/master -A tools.haskell-language-servers
+```
+
+home-manager users can add the values to `home.packages`:
 
 ```nix
 let
-  hls = er-nix.tools.haskell-language-server { project = hsPkgs.earnest-project };
-in
-hsPkgs.shellFor {
-  buildInputs = [ ... ] ++ builtins.attrValues hls;
+  er-nix = import sources.er-nix;
+{
+  home.packages = [
+    # Your other nixpkgs here
+  ] ++ builtins.attrValues er-nix.tools.haskell-language-servers;
 }
 ```
+
+There is also a `tools.haskellLanguageServersFor` function that takes an array of ghcVersions, but this isn't guaranteed to be in our cachix.
+If you need more, please consider a PR here.
 
 ## Development
 
