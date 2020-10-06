@@ -133,3 +133,39 @@ jobs:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
     - run: cd test && nix-shell --run "exit 0" --arg buildMusl '${{ matrix.buildMusl }}' --argstr compiler-nix-name '${{ matrix.ghc }}'
+
+  cache-linux-hls:
+    needs: cache-linux-ghc
+    runs-on: [ ubuntu-latest ]
+    strategy:
+      matrix:
+        ghc: [ ghc865, ghc883, ghc884 ]
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v2
+    - uses: cachix/install-nix-action@v11
+      with:
+        skip_adding_nixpkgs_channel: true
+    - uses: cachix/cachix-action@v6
+      with:
+        name: earnestresearch-public
+        signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
+    - run: nix-build -E "(import ./.).tools.haskellLanguageServersFor [ \"${{ matrix.ghc }}\" ]"
+
+  cache-macos-hls:
+    needs: cache-macos-ghc
+    runs-on: [ macos-latest ]
+    strategy:
+      matrix:
+        ghc: [ ghc865, ghc883, ghc884 ]
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v2
+    - uses: cachix/install-nix-action@v11
+      with:
+        skip_adding_nixpkgs_channel: true
+    - uses: cachix/cachix-action@v6
+      with:
+        name: earnestresearch-public
+        signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
+    - run: nix-build -E "(import ./.).tools.haskellLanguageServersFor [ \"${{ matrix.ghc }}\" ]"

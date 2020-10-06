@@ -29,10 +29,18 @@ rec {
 
   inherit (import sources.niv {}) niv;
 
-  tools = {
+  tools = rec {
     haskell-language-server =
-      pkgs.callPackage ./tools/haskell-language-server {
-        inherit sources;
+      { ... }@args: pkgs.lib.warn "haskell-language-server is deprecated.  Install haskellLanguageServersFor(ghcVersions) to your environment."
+        pkgs.callPackage ./tools/haskell-language-server/hls.nix
+        {}
+        ({ inherit sources; } // args);
+
+    haskell-language-servers = haskellLanguageServersFor [ "ghc865" "ghc884" ];
+
+    haskellLanguageServersFor = ghcVersions:
+      pkgs.callPackage ./tools/haskell-language-server/hlsFor.nix {} {
+        inherit ghcVersions sources;
       };
   };
 }

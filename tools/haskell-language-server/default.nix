@@ -1,23 +1,15 @@
 { fetchFromGitHub
 , haskell-nix
 , makeWrapper
-, sources
 , stdenv
 }:
 
-{ project
-, # We can't infer this, which is fine as long as we're using a hashed
-  # one.  We're just overriding nix-hls' pin here so haskell.nix looks
-  # it up in its own indexStateHashesPath.
-  index-sha256 ? null
+{ ghcVersion
+, sources
+, index-state
+, index-sha256
 }:
 let
-  ghcVersion = project.project.pkg-set.options.compiler.nix-name.value;
-  index-state =
-    if builtins.hasAttr "index-state" project
-    then project.index-state
-    else null;
-
   # Most of what follows is inlined https://github.com/shajra/nix-hls.
   # We tried to call it directly, but getting it to use our nixpkgs
   # proved irksome.
