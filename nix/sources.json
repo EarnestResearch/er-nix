@@ -12,15 +12,15 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "haskell-language-server": {
-        "branch": "0.4.0",
+        "branch": "0.5.0",
         "description": "Integration point for ghcide and haskell-ide-engine. One IDE to rule them all.",
         "homepage": null,
         "owner": "haskell",
         "repo": "haskell-language-server",
-        "rev": "0a18edde24923251a148cbbc0ae993a6aac83b9c",
-        "sha256": "0kvfsj1n6kx1nam3hygbm3rj5y22skfcka85s46yb6b72a23a4fn",
+        "rev": "14497f2503a2a0d389fabf3b146d674b9af41a34",
+        "sha256": "1r548yv67a38dhfgcm1b70b0cib9alhzxdz96f7sx9y8mfn2nk0g",
         "type": "tarball",
-        "url": "https://github.com/haskell/haskell-language-server/archive/0a18edde24923251a148cbbc0ae993a6aac83b9c.tar.gz",
+        "url": "https://github.com/haskell/haskell-language-server/archive/14497f2503a2a0d389fabf3b146d674b9af41a34.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "haskell-nix": {
@@ -29,10 +29,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "662b7dbc128dfb92dd23452fc949e26bb7fc709d",
-        "sha256": "06xfcx1nh2hm69didz7syv3a35s5dh6418s4rzwi060b9xncs1j5",
+        "rev": "6134e66e1decf2155ba500dd5de00adb06e2cdee",
+        "sha256": "1w6mvlblszl3spx46m3a4bz13xah18gkznzpk0fzkmfizasv7lgi",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/662b7dbc128dfb92dd23452fc949e26bb7fc709d.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/6134e66e1decf2155ba500dd5de00adb06e2cdee.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {
