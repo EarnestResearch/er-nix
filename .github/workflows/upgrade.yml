@@ -6,7 +6,8 @@ on:
     - cron: '00 08 1-7,15-21 * 2'
   workflow_dispatch:
   push:
-    - upggrade-bot
+    branches:
+      - upgrade-bot
 jobs:
   create-pull-request:
     runs-on: ubuntu-latest
