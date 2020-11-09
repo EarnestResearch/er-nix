@@ -1,0 +1,26 @@
+name: Upgrade Niv and LTS
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: cachix/install-nix-action@v11
+      with:
+        skip_adding_nixpkgs_channel: true
+    - uses: cachix/cachix-action@v7
+      with:
+        name: earnestresearch-public
+    - name: Update dependencies
+      run: niv update
+    - name: Update test cabal.project.freeze to latest LTS
+      run: curl -L https://www.stackage.org/lts/cabal.config > test/cabal.project.freeze
+    - name: Create pull request
+      id: cpr
+      uses: peter-evans/create-pull-request@v3
+      with:
+        commit-message: Niv and LTS upgrades
+        committer: er-nix-bot <noreply@earnestresearch.com>
+        branch: create-pull-request/upgrade
+        delete-branch: true
+        title: Niv and LTS upgrades
