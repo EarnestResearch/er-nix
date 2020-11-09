@@ -18,7 +18,7 @@ jobs:
       with:
         name: earnestresearch-public
     - name: Update dependencies
-      run: niv update
+      run: nix-shell --command 'niv update'
     - name: Update test cabal.project.freeze to latest LTS
       run: curl -L https://www.stackage.org/lts/cabal.config > test/cabal.project.freeze
     - name: Create pull request
