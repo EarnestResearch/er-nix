@@ -4,6 +4,7 @@ on:
   schedule:
     # First and third Tuesday of every month at 8am
     - cron: '00 08 1-7,15-21 * 2'
+  workflow_dispatch:
 jobs:
   create-pull-request:
     runs-on: ubuntu-latest
