@@ -20,8 +20,7 @@ jobs:
     - name: Update dependencies
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GITHUB_PATH:
-      run: nix-shell --command 'niv update'
+      run: GITHUB_PATH= nix-shell --command 'niv update'
     - name: Update test cabal.project.freeze to latest LTS
       run: curl -L https://www.stackage.org/lts/cabal.config > test/cabal.project.freeze
     - name: Create pull request
