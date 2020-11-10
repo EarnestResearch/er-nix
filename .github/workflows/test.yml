@@ -168,4 +168,7 @@ jobs:
       with:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: nix-build -E "(import ./.).tools.haskellLanguageServersFor [ \"${{ matrix.ghc }}\" ]"
+    - name: Cache shell dependencies
+      run: nix-shell --command 'exit 0'
+    - name: Build Haskell Language Servers
+      run: nix-build -E "(import ./.).tools.haskellLanguageServersFor [ \"${{ matrix.ghc }}\" ]"
