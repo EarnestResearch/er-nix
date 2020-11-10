@@ -2,8 +2,8 @@ name: Upgrade Niv and LTS
 
 on:
   schedule:
-    # First and third Tuesday of every month at 8am
-    - cron: '00 08 1-7,15-21 * 2'
+    # Second and fourth Tuesday of every month at 8am
+    - cron: '00 08 8-14,22-28 * 2'
   workflow_dispatch:
   push:
     branches:
