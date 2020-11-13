@@ -39,7 +39,7 @@ let
       fetchFromGitHub {
         inherit owner repo rev;
         name = "haskell-language-server-with-submodules-src";
-        sha256 = "0vkh5ff6l5wr4450xmbki3cfhlwf041fjaalnwmj7zskd72s9p7p";
+        sha256 = "027fq6752024wzzq9izsilm5lkq9gmpxf82rixbimbijw0yk4pwj";
         fetchSubmodules = true;
       };
   };
