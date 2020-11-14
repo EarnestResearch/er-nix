@@ -183,7 +183,8 @@ If you need more, please consider a PR here.
 
 ### hopenpgp-tools
 
-`hopenpgp-tools` is referenced in Earnest's GPG instructions, but currently marked as broken.
+`hopenpgp-tools` is referenced in Earnest's GPG instructions, but currently marked as broken in vanilla nixpkgs.
+We provide a working derivation here as a convenience.
 To add it to your environment:
 
 ```sh
