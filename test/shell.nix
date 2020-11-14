@@ -13,5 +13,5 @@ hsPkgs.shellFor {
     hpack = "0.34.2";
   };
 
-  buildInputs = [];
+  buildInputs = builtins.attrValues er-nix.tools.hopenpgp-tools;
 }
