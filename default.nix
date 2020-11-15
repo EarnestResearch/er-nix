@@ -42,5 +42,11 @@ rec {
       pkgs.callPackage ./tools/haskell-language-server/hlsFor.nix {} {
         inherit ghcVersions sources;
       };
+
+    hopenpgp-tools = (pkgs.haskell-nix.hackage-package {
+      name = "hopenpgp-tools";
+      version = "0.23.3";
+      compiler-nix-name = "ghc884";
+    }).components.exes;
   };
 }

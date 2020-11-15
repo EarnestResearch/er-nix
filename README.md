@@ -181,6 +181,28 @@ let
 There is also a `tools.haskellLanguageServersFor` function that takes an array of ghcVersions, but this isn't guaranteed to be in our cachix.
 If you need more, please consider a PR here.
 
+### hopenpgp-tools
+
+`hopenpgp-tools` is referenced in Earnest's GPG instructions, but currently marked as broken in vanilla nixpkgs.
+We provide a working derivation here as a convenience.
+To add it to your environment:
+
+```sh
+nix-env -if https://github.com/EarnestResearch/er-nix/tarball/master -A tools.hopenpgp-tools
+```
+
+home-manager users can add the values to `home.packages`:
+
+```nix
+let
+  er-nix = import sources.er-nix;
+{
+  home.packages = [
+    # Your other nixpkgs here
+  ] ++ builtins.attrValues er-nix.tools.hopenpgp-tools;
+}
+```
+
 ## Development
 
 ### Updating sources
