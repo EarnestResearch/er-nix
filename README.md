@@ -196,3 +196,7 @@ To update all sources:
 ```sh
 niv update
 ```
+
+### Automated updates
+
+The `upgrade.yml` workflow runs a niv update and fetches the latest LTS on the second and fourth Tuesday of every month.
