@@ -5,6 +5,9 @@ on:
     # Second and fourth Tuesday of every month at 8am
     - cron: '00 08 8-14,22-28 * 2'
   workflow_dispatch:
+  push:
+    branches:
+      - upgrade-bot
 jobs:
   create-pull-request:
     runs-on: ubuntu-latest
