@@ -12,8 +12,6 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
-      with:
-        ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
     - uses: cachix/install-nix-action@v12
       with:
         skip_adding_nixpkgs_channel: true

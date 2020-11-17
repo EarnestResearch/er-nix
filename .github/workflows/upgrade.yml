@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
     - uses: cachix/install-nix-action@v12
     - uses: cachix/cachix-action@v7
       with:
