@@ -27,7 +27,7 @@ jobs:
       uses: peter-evans/create-pull-request@v3
       with:
         commit-message: Niv and LTS upgrades
-        committer: er-nix-bot <noreply@earnestresearch.com>
+        author: er-nix-bot <noreply@earnestresearch.com>
         branch: create-pull-request/upgrade
         delete-branch: true
         title: Niv and LTS upgrades
