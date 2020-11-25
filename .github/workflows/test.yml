@@ -42,7 +42,7 @@ jobs:
     - run: nix-build -E '(import ./.).${{ matrix.pkgs }}.haskell-nix.roots "${{ matrix.ghc }}"'
 
   cache-ghc:
-    needs: cache-linux-haskell-nix-roots
+    needs: cache-haskell-nix-roots
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -62,7 +62,7 @@ jobs:
     - run: nix-build -E "(import ./.).${{ matrix.pkgs }}.buildPackages.haskell-nix.compiler.${{ matrix.ghc }}"
 
   cache-projects:
-    needs: cache-linux-ghc
+    needs: cache-ghc
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -82,7 +82,7 @@ jobs:
     - run: cd test && nix-shell --run "exit 0" --arg buildMusl '${{ matrix.buildMusl }}' --argstr compiler-nix-name '${{ matrix.ghc }}'
 
   cache-hls:
-    needs: cache-linux-ghc
+    needs: cache-ghc
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
