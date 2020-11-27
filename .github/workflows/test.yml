@@ -22,30 +22,13 @@ jobs:
     - run: cachix use pre-commit-hooks
     - run: nix-build -E "(import ./.).pkgs.pre-commit-hooks"
 
-  cache-linux-haskell-nix-roots:
-    runs-on: ubuntu-latest
+  cache-haskell-nix-roots:
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        pkgs: [ pkgs, pkgs.pkgsCross.musl64 ]
-        ghc: [ ghc865, ghc883, ghc884, ghc8101 ]
-      fail-fast: false
-    steps:
-    - uses: actions/checkout@v2
-    - uses: cachix/install-nix-action@v12
-      with:
-        skip_adding_nixpkgs_channel: true
-    - uses: cachix/cachix-action@v8
-      with:
-        name: earnestresearch-public
-        signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: nix-build -E '(import ./.).${{ matrix.pkgs }}.haskell-nix.roots "${{ matrix.ghc }}"'
-
-  cache-macos-haskell-nix-roots:
-    runs-on: macos-latest
-    strategy:
-      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+        ghc: [ ghc865, ghc884, ghc8101 ]
         pkgs: [ pkgs ]
-        ghc: [ ghc865, ghc883, ghc884, ghc8101 ]
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
@@ -58,31 +41,13 @@ jobs:
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
     - run: nix-build -E '(import ./.).${{ matrix.pkgs }}.haskell-nix.roots "${{ matrix.ghc }}"'
 
-  cache-linux-ghc:
-    needs: cache-linux-haskell-nix-roots
-    runs-on: ubuntu-latest
+  cache-ghc:
+    needs: cache-haskell-nix-roots
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        ghc: [ ghc865, ghc883, ghc884, ghc8101 ]
-        pkgs: [ pkgs, pkgs.pkgsCross.musl64 ]
-      fail-fast: false
-    steps:
-    - uses: actions/checkout@v2
-    - uses: cachix/install-nix-action@v12
-      with:
-        skip_adding_nixpkgs_channel: true
-    - uses: cachix/cachix-action@v8
-      with:
-        name: earnestresearch-public
-        signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: nix-build -E "(import ./.).${{ matrix.pkgs }}.buildPackages.haskell-nix.compiler.${{ matrix.ghc }}"
-
-  cache-macos-ghc:
-    needs: cache-macos-haskell-nix-roots
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        ghc: [ ghc865, ghc883, ghc884, ghc8101 ]
+        os: [ ubuntu-latest, macos-latest ]
+        ghc: [ ghc865, ghc884, ghc8101 ]
         pkgs: [ pkgs ]
       fail-fast: false
     steps:
@@ -96,31 +61,13 @@ jobs:
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
     - run: nix-build -E "(import ./.).${{ matrix.pkgs }}.buildPackages.haskell-nix.compiler.${{ matrix.ghc }}"
 
-  cache-linux-projects:
-    needs: cache-linux-ghc
-    runs-on: ubuntu-latest
+  cache-projects:
+    needs: cache-ghc
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        ghc: [ ghc865, ghc883, ghc884 ]
-        buildMusl: [ true, false ]
-      fail-fast: false
-    steps:
-    - uses: actions/checkout@v2
-    - uses: cachix/install-nix-action@v12
-      with:
-        skip_adding_nixpkgs_channel: true
-    - uses: cachix/cachix-action@v8
-      with:
-        name: earnestresearch-public
-        signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: cd test && nix-shell --run "exit 0" --arg buildMusl '${{ matrix.buildMusl }}' --argstr compiler-nix-name '${{ matrix.ghc }}'
-
-  cache-macos-projects:
-    needs: cache-macos-ghc
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        ghc: [ ghc865, ghc883, ghc884 ]
+        os: [ ubuntu-latest, macos-latest ]
+        ghc: [ ghc865, ghc884 ]
         buildMusl: [ false ]
       fail-fast: false
     steps:
@@ -134,12 +81,13 @@ jobs:
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
     - run: cd test && nix-shell --run "exit 0" --arg buildMusl '${{ matrix.buildMusl }}' --argstr compiler-nix-name '${{ matrix.ghc }}'
 
-  cache-linux-hls:
-    needs: cache-linux-ghc
-    runs-on: [ ubuntu-latest ]
+  cache-hls:
+    needs: cache-ghc
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        ghc: [ ghc865, ghc883, ghc884 ]
+        os: [ ubuntu-latest, macos-latest ]
+        ghc: [ ghc865, ghc884 ]
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
@@ -151,24 +99,3 @@ jobs:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
     - run: nix-build -E "(import ./.).tools.haskellLanguageServersFor [ \"${{ matrix.ghc }}\" ]"
-
-  cache-macos-hls:
-    needs: cache-macos-ghc
-    runs-on: [ macos-latest ]
-    strategy:
-      matrix:
-        ghc: [ ghc865, ghc883, ghc884 ]
-      fail-fast: false
-    steps:
-    - uses: actions/checkout@v2
-    - uses: cachix/install-nix-action@v12
-      with:
-        skip_adding_nixpkgs_channel: true
-    - uses: cachix/cachix-action@v8
-      with:
-        name: earnestresearch-public
-        signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - name: Cache shell dependencies
-      run: nix-shell --command true
-    - name: Build Haskell Language Servers
-      run: nix-build -E "(import ./.).tools.haskellLanguageServersFor [ \"${{ matrix.ghc }}\" ]"
