@@ -14,13 +14,14 @@ jobs:
     - uses: actions/checkout@v2
     - uses: cachix/install-nix-action@v12
       with:
-        skip_adding_nixpkgs_channel: true
+        nix_path: nixpkgs=channel:nixos-unstable
     - uses: cachix/cachix-action@v8
       with:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
     - run: cachix use pre-commit-hooks
-    - run: nix-build -E "(import ./.).pkgs.pre-commit-hooks"
+    - run: nix-env -i coreutils -f '<nixpkgs>'
+    - run: timeout -v -k 1m 400m nix-build -E "(import ./.).pkgs.pre-commit-hooks"
 
   cache-haskell-nix-roots:
     runs-on: ${{ matrix.os }}
@@ -34,12 +35,13 @@ jobs:
     - uses: actions/checkout@v2
     - uses: cachix/install-nix-action@v12
       with:
-        skip_adding_nixpkgs_channel: true
+        nix_path: nixpkgs=channel:nixos-unstable
     - uses: cachix/cachix-action@v8
       with:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: nix-build -E '(import ./.).${{ matrix.pkgs }}.haskell-nix.roots "${{ matrix.ghc }}"'
+    - run: nix-env -i coreutils -f '<nixpkgs>'
+    - run: timeout -v -k 1m 400m nix-build -E '(import ./.).${{ matrix.pkgs }}.haskell-nix.roots "${{ matrix.ghc }}"'
 
   cache-ghc:
     needs: cache-haskell-nix-roots
@@ -54,12 +56,13 @@ jobs:
     - uses: actions/checkout@v2
     - uses: cachix/install-nix-action@v12
       with:
-        skip_adding_nixpkgs_channel: true
+        nix_path: nixpkgs=channel:nixos-unstable
     - uses: cachix/cachix-action@v8
       with:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: nix-build -E "(import ./.).${{ matrix.pkgs }}.buildPackages.haskell-nix.compiler.${{ matrix.ghc }}"
+    - run: nix-env -i coreutils -f '<nixpkgs>'
+    - run: timeout -v -k 1m 400m nix-build -E "(import ./.).${{ matrix.pkgs }}.buildPackages.haskell-nix.compiler.${{ matrix.ghc }}"
 
   cache-projects:
     needs: cache-ghc
@@ -74,12 +77,13 @@ jobs:
     - uses: actions/checkout@v2
     - uses: cachix/install-nix-action@v12
       with:
-        skip_adding_nixpkgs_channel: true
+        nix_path: nixpkgs=channel:nixos-unstable
     - uses: cachix/cachix-action@v8
       with:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: cd test && nix-shell --run "exit 0" --arg buildMusl '${{ matrix.buildMusl }}' --argstr compiler-nix-name '${{ matrix.ghc }}'
+    - run: nix-env -i coreutils -f '<nixpkgs>'
+    - run: cd test && timeout -v -k 1m 400m nix-shell --run "exit 0" --arg buildMusl '${{ matrix.buildMusl }}' --argstr compiler-nix-name '${{ matrix.ghc }}'
 
   cache-hls:
     needs: cache-ghc
@@ -93,9 +97,10 @@ jobs:
     - uses: actions/checkout@v2
     - uses: cachix/install-nix-action@v12
       with:
-        skip_adding_nixpkgs_channel: true
+        nix_path: nixpkgs=channel:nixos-unstable
     - uses: cachix/cachix-action@v8
       with:
         name: earnestresearch-public
         signingKey: '${{ secrets.EARNESTRESEARCH_PUBLIC_CACHIX_SIGNING_KEY }}'
-    - run: nix-build -E "(import ./.).tools.haskellLanguageServersFor [ \"${{ matrix.ghc }}\" ]"
+    - run: nix-env -i coreutils -f '<nixpkgs>'
+    - run: timeout -v -k 1m 400m nix-build -E "(import ./.).tools.haskellLanguageServersFor [ \"${{ matrix.ghc }}\" ]"
