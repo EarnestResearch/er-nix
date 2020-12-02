@@ -210,7 +210,7 @@ let
 We use [niv](https://github.com/nmattia/niv) to manage our source pins.  `niv` is available in the nix-shell for this project.  To update a single source:
 
 ```sh
-niv update nixpkgs-unstable
+niv update nixpkgs
 ```
 
 To update all sources:
