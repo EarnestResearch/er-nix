@@ -28,7 +28,7 @@ let
         src = sources'."${name}";
       };
     in
-      allExes (haskell-nix.cabalProject planConfig)."${name}";
+    allExes (haskell-nix.cabalProject planConfig)."${name}";
 
   sources' = {
     # This has a submodule, which niv doesn't yet handle.
@@ -39,13 +39,13 @@ let
       fetchFromGitHub {
         inherit owner repo rev;
         name = "haskell-language-server-with-submodules-src";
-        sha256 = "027fq6752024wzzq9izsilm5lkq9gmpxf82rixbimbijw0yk4pwj";
+        sha256 = "0w37792wkq4ys7afgali4jg1kwgkbpk8q0y95fd2j1vgpk0pndlr";
         fetchSubmodules = true;
       };
   };
 
   build = fromSource "haskell-language-server"
-    [ { enableSeparateDataOutput = true; } ];
+    [{ enableSeparateDataOutput = true; }];
 
   trueVersion = {
     "ghc861" = "8.6.1";
