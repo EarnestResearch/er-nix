@@ -8,7 +8,7 @@ let
       sha256 = "65fceb95a4e44e25522801097b390bb4ec985248e8ceda55db08ee5620aac409";
     };
   };
-  unsupported = throw "Platform ${stdenv.hostPlatform.system} unsupported for aws-logs";
+  unsupported = throw "Platform ${stdenv.hostPlatform.system} unsupported for snowflake-odbc";
 in
 stdenv.mkDerivation rec {
   name = "snowflake-odbc-${version}";
