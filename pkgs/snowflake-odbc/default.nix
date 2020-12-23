@@ -62,7 +62,7 @@ let
     nativeBuildInputs = [ undmg xar cpio ];
 
     unpackPhase = stdenv.lib.optionalString stdenv.isDarwin ''
-      undmg < $src
+      undmg $src
       xar -xf snowflakeODBC.pkg
       zcat Payload | cpio -i
     '';
