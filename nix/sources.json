@@ -29,10 +29,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "604f0991571469b34c295a1f05c28672db1fc361",
-        "sha256": "0qhq16525r4wyrm4njz9gb1wrbnvdnj9d7b5hf7dyldyx21wimyd",
+        "rev": "e78aa9bf0585eeabcd2d051cdc674b1cd5e3cde6",
+        "sha256": "1xcig5xlkaq7db0g66pl454ygj4496p9w5my26gahfdg2ndz5zwj",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/604f0991571469b34c295a1f05c28672db1fc361.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/e78aa9bf0585eeabcd2d051cdc674b1cd5e3cde6.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {
@@ -53,10 +53,10 @@
         "homepage": "https://github.com/NixOS/nixpkgs",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "d183736d699bf65c1fbf5b3b7bbfac2f28d726cd",
-        "sha256": "10y2si8j27g8h3wzw9fs84y75379kra25dkn9fmyq2952yfpggvp",
+        "rev": "972160461015767a1fba93114e1756e7e9645d98",
+        "sha256": "19iqvfc1qjv9sx44ncggqc2wjy0n85nl0gzvp0gz53npfr2g2l99",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/d183736d699bf65c1fbf5b3b7bbfac2f28d726cd.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/972160461015767a1fba93114e1756e7e9645d98.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "okta-aws-login": {
@@ -65,10 +65,10 @@
         "homepage": null,
         "owner": "EarnestResearch",
         "repo": "okta-aws-login",
-        "rev": "47bbcac4a16e8e4998c200f959d2706843726f96",
-        "sha256": "0qlyy0vmx7bp99kgasn8bw6xwgf0z5k6y35zgw0qj2c683f34hlr",
+        "rev": "1907ea2b909ac832b2c7402a9125de407411c1a2",
+        "sha256": "1phsbb4np6pp2bfl0kdpxvjd6ndxcd8hl7zn4b34jlyl6z4bsjyp",
         "type": "tarball",
-        "url": "https://github.com/EarnestResearch/okta-aws-login/archive/47bbcac4a16e8e4998c200f959d2706843726f96.tar.gz",
+        "url": "https://github.com/EarnestResearch/okta-aws-login/archive/1907ea2b909ac832b2c7402a9125de407411c1a2.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "pre-commit-hooks": {
@@ -77,10 +77,10 @@
         "homepage": "",
         "owner": "cachix",
         "repo": "pre-commit-hooks.nix",
-        "rev": "1b11ce0f8c65dd3d8e9520e23c100b76d09a858b",
-        "sha256": "0l2v8hsxrvj8w335xxxln49rpd9z5ncv6bl2wnk65zzzd4wa5rkm",
+        "rev": "d16e007e6bd263ba5899a9a425d76a78906570cd",
+        "sha256": "1c0lv3yzq1kkqm4j37wl5hlawlsrj1413vkr1mdm661klad2sa0d",
         "type": "tarball",
-        "url": "https://github.com/cachix/pre-commit-hooks.nix/archive/1b11ce0f8c65dd3d8e9520e23c100b76d09a858b.tar.gz",
+        "url": "https://github.com/cachix/pre-commit-hooks.nix/archive/d16e007e6bd263ba5899a9a425d76a78906570cd.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
