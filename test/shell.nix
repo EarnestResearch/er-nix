@@ -9,7 +9,7 @@ in
 hsPkgs.shellFor {
   tools = {
     cabal = "3.4.0.0";
-    haskell-language-server = "latest";
+    haskell-language-server = er-nix.tools.haskellLanguageServersFor([compiler-nix-name]);
     hpack = "0.34.3";
   };
 
