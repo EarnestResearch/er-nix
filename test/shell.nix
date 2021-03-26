@@ -8,9 +8,9 @@ let
 in
 hsPkgs.shellFor {
   tools = {
-    cabal = "3.2.0.0";
-    ghcide = "0.4.0";
-    hpack = "0.34.2";
+    cabal = "3.4.0.0";
+    haskell-language-server = "latest";
+    hpack = "0.34.3";
   };
 
   buildInputs = builtins.attrValues er-nix.tools.hopenpgp-tools;
