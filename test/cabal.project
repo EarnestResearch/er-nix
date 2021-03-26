@@ -7,15 +7,18 @@ source-repository-package
   location: https://github.com/EarnestResearch/amazonka.git
   tag: bf506b70199551c31bde193ed0642254fc2a176a
   subdir: amazonka
+  --sha256: 160hbvj1m3xmqijq3qrvvnlnq9s3wwj2syh2pncjlwam1dnz8dyp
 
 source-repository-package
   type: git
   location: https://github.com/EarnestResearch/amazonka.git
   tag: bf506b70199551c31bde193ed0642254fc2a176a
   subdir: core
+  --sha256: 160hbvj1m3xmqijq3qrvvnlnq9s3wwj2syh2pncjlwam1dnz8dyp
 
 source-repository-package
   type: git
   location: https://github.com/EarnestResearch/amazonka.git
   tag: bf506b70199551c31bde193ed0642254fc2a176a
   subdir: amazonka-ec2
+  --sha256: 160hbvj1m3xmqijq3qrvvnlnq9s3wwj2syh2pncjlwam1dnz8dyp
