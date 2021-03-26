@@ -9,9 +9,11 @@ in
 hsPkgs.shellFor {
   tools = {
     cabal = "3.4.0.0";
-    haskell-language-server = er-nix.tools.haskellLanguageServersFor([compiler-nix-name]);
     hpack = "0.34.3";
   };
 
-  buildInputs = builtins.attrValues er-nix.tools.hopenpgp-tools;
+  buildInputs =
+    builtins.attrValues er-nix.tools.hopenpgp-tools
+    ++ builtins.attrValues (er-nix.tools.haskellLanguageServersFor [ "ghc884" ]);
+
 }
