@@ -1,6 +1,10 @@
 let
   sources = import ./nix/sources.nix;
-  haskell-nix = import sources.haskell-nix {};
+  haskell-nix = import sources.haskell-nix {
+    sourcesOverride = {
+      nixpkgs = sources.nixpkgs;
+    };
+  };
 in
 rec {
   # A pinned version of nixpkgs, widely used and hopefully well cached.
