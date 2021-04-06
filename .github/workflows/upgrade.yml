@@ -12,7 +12,7 @@ jobs:
       with:
         ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
     - uses: cachix/install-nix-action@v13
-    - uses: cachix/cachix-action@v7
+    - uses: cachix/cachix-action@v9
       with:
         name: earnestresearch-public
     - name: Update dependencies
