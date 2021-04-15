@@ -40,7 +40,7 @@ rec {
         {}
         ({ inherit sources; } // args);
 
-    haskell-language-servers = haskellLanguageServersFor [ "ghc865" "ghc884" ];
+    haskell-language-servers = haskellLanguageServersFor [ "ghc865" "ghc884" "ghc8104" ];
 
     haskellLanguageServersFor = ghcVersions:
       pkgs.callPackage ./tools/haskell-language-server/hlsFor.nix {} {

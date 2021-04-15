@@ -28,7 +28,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, macos-latest ]
-        ghc: [ ghc865, ghc884, ghc8101 ]
+        ghc: [ ghc865, ghc884, ghc8104 ]
         pkgs: [ pkgs ]
       fail-fast: false
     steps:
@@ -49,7 +49,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, macos-latest ]
-        ghc: [ ghc865, ghc884 ]
+        ghc: [ ghc865, ghc884, ghc8104 ]
         buildMusl: [ false ]
       fail-fast: false
     steps:
@@ -70,7 +70,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, macos-latest ]
-        ghc: [ ghc865, ghc884 ]
+        ghc: [ ghc865, ghc884, ghc8104 ]
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
