@@ -12,15 +12,15 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "haskell-language-server": {
-        "branch": "1.1.0",
+        "branch": "1.2.0",
         "description": "Integration point for ghcide and haskell-ide-engine. One IDE to rule them all.",
         "homepage": null,
         "owner": "haskell",
         "repo": "haskell-language-server",
-        "rev": "f1c096927186a93d8e3ccd4fe8385cc1b070350b",
-        "sha256": "0kviq3kinm3i0qm4r26rdnlkwbs1s3r1rqiqdry517rgkgnjpcp5",
+        "rev": "be2071e985cb417f984ab00a1aad76dee02d6d0b",
+        "sha256": "0gpbk0si0gvk5bahdig90mwcvzyq7kbxnszxnyjc5xnvb3y5pnmw",
         "type": "tarball",
-        "url": "https://github.com/haskell/haskell-language-server/archive/f1c096927186a93d8e3ccd4fe8385cc1b070350b.tar.gz",
+        "url": "https://github.com/haskell/haskell-language-server/archive/be2071e985cb417f984ab00a1aad76dee02d6d0b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "haskell-nix": {
