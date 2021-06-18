@@ -222,3 +222,7 @@ niv update
 ### Automated updates
 
 The `upgrade.yml` workflow runs a niv update and fetches the latest LTS on the second and fourth Tuesday of every month.
+
+It is not uncommon for builds to time out, particularly on ghc-8.10.4.  Typically someone has to restart it.  Enough forward progress is made in cachix, it usually works the second or third time, depending on how much changed.
+
+To improve cache hits in projects, copy `test/cabal.project.freeze` into your project or template.  There is not currently any automation around this process.
