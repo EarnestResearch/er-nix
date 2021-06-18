@@ -6,7 +6,7 @@ self: super:
         (
           { pkgs, buildModules, config, lib, ... }:
             {
-              packages.x509-system.patches = pkgs.stdenv.lib.optionals pkgs.stdenv.hostPlatform.isDarwin [ ./patches/x509-system.patch ];
+              packages.x509-system.patches = pkgs.lib.optionals pkgs.stdenv.hostPlatform.isDarwin [ ./patches/x509-system.patch ];
             }
         )
       ];

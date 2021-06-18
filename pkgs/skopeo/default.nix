@@ -1,4 +1,5 @@
 { stdenv
+, lib
 , buildGoModule
 , fetchFromGitHub
 , runCommand
@@ -32,7 +33,7 @@ buildGoModule rec {
   nativeBuildInputs = [ pkg-config go-md2man installShellFiles makeWrapper ];
 
   buildInputs = [ gpgme ]
-  ++ stdenv.lib.optionals stdenv.isLinux [ lvm2 btrfs-progs ];
+  ++ lib.optionals stdenv.isLinux [ lvm2 btrfs-progs ];
 
   buildPhase = ''
     patchShebangs .
@@ -45,14 +46,14 @@ buildGoModule rec {
     installShellCompletion --bash completions/bash/skopeo
   '';
 
-  postInstall = stdenv.lib.optionals stdenv.isLinux ''
+  postInstall = lib.optionals stdenv.isLinux ''
     wrapProgram $out/bin/skopeo \
-      --prefix PATH : ${stdenv.lib.makeBinPath [ fuse-overlayfs ]}
+      --prefix PATH : ${lib.makeBinPath [ fuse-overlayfs ]}
   '';
 
   passthru.tests.docker-tools = nixosTests.docker-tools;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "A command line utility for various operations on container images and image repositories";
     homepage = "https://github.com/containers/skopeo";
     maintainers = with maintainers; [ lewo ] ++ teams.podman.members;

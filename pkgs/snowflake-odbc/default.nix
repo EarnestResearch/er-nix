@@ -20,7 +20,7 @@ let
     x86_64-linux = "https://sfc-repo.snowflakecomputing.com/odbc/linux/latest/snowflake_linux_x8664_odbc-${version}.tgz";
   }.${system} or throwSystem;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Snowflake ODBC drivers";
     homepage = "https://docs.snowflake.com/en/index.html";
     downloadPage = "https://docs.snowflake.com/en/user-guide/odbc-download.html";
@@ -61,7 +61,7 @@ let
 
     nativeBuildInputs = [ undmg xar cpio ];
 
-    unpackPhase = stdenv.lib.optionalString stdenv.isDarwin ''
+    unpackPhase = lib.optionalString stdenv.isDarwin ''
       undmg $src
       xar -xf snowflakeODBC.pkg
       zcat Payload | cpio -i
