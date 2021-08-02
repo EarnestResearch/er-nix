@@ -20,7 +20,7 @@ buildGoModule rec {
 
   src = builtins.fetchGit {
     url = "https://github.com/containers/skopeo.git";
-    ref = "refs/heads/master";
+    ref = "refs/heads/main";
     rev = "c052ed7ec8622187679ff067d795acbdd45e4530";
   };
 
