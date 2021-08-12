@@ -5,8 +5,8 @@ in
 pre-commit-hooks.run {
   src = ./.;
   hooks = {
-    hlint.enable = true;
+    hlint.enable = false;
     nixpkgs-fmt.enable = true;
-    ormolu.enable = true;
+    ormolu.enable = false;
   };
 }

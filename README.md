@@ -10,14 +10,12 @@ Common Nix code for Earnest Research
     - [Quick start](#quick-start)
         - [`nixpkgs/default.nix`](#nixpkgsdefaultnix)
         - [`default.nix`](#defaultnix)
-        - [Cross-system builds](#cross-system-builds)
-    - [Building Docker images](#building-docker-images)
+    - [Building Docker images for AWS environment](#building-docker-images-for-aws-environment)
     - [Cabal utilities](#cabal-utilities)
-    - [Custom packages](#custom-packages)
-    - [Tools](#tools)
-        - [haskell-language-server](#haskell-language-server)
+        - [hopenpgp-tools](#hopenpgp-tools)
     - [Development](#development)
         - [Updating sources](#updating-sources)
+        - [Automated updates](#automated-updates)
 
 <!-- markdown-toc end -->
 
@@ -39,7 +37,6 @@ $ nix-channel --add  https://github.com/EarnestResearch/er-nix/archive/master.ta
 Use it to install our packages, e.g.
 ```bash
 $ nix-channel --update
-$ nix-env -f '<er-nix>' -i  -A 'pkgs.okta-aws-login'
 ```
 
 To keep up with new releases:
@@ -69,7 +66,7 @@ in
   er-nix.pkgsForSystem(system)
 ```
 
-This will provide a patched nixpkgs which includes [haskell-nix](https://github.com/input-output-hk/haskell.nix) and some local changes for the current system.
+This will provide our nix tools maintained in this repository.
 
 ### `default.nix`
 
@@ -82,26 +79,7 @@ in
   { /* your derivation here */ }
 ```
 
-### Cross-system builds
-
-The build can be parameterized on `system`, for instance to support building Docker images from a MacBook using a [remote builder](https://github.com/LnL7/nix-docker/#running-as-a-remote-builder).  Pass it as an argument to your `./nixpkgs`:
-
-```nix
-{ system ? builtins.currentSystem }:
-
-let
-  pkgs = import ./nixpkgs { inherit system; };
-in
-  { /* your derivation here */ }
-```
-
-The system can then be overridden from the command line:
-
-```sh
-nix build -L -f . --argstr system x86_64-linux
-```
-
-## Building Docker images
+## Building Docker images for AWS environment
 
 If you have a Docker image (built with `dockerTools.buildImage`, you can push this to AWS ECR with something like:
 
@@ -141,45 +119,6 @@ and then add `cabal new-run` shell wrappers for all executables defined in your 
   ...other stuff...
   ] ++ cabalProject.projectApps;
 ```
-
-## Custom packages
-
-`er-nix.pkgs` provides some additional packages not available in the standard nixpkgs.  These may be useful in your own development configurations:
-
-* [`haskell-nix`](https://input-output-hk.github.io/haskell.nix/)
-* [`okta-aws-login`](https://github.com/EarnestResearch/okta-aws-login)
-
-## Tools
-
-We also add some development tools in `er-nix.tools`.
-One reason they're distinct from packages is that they may require arguments to configure.
-`pkgs.haskell-nix.tool` provides a lot, so this is mainly a holding area for things that aren't yet there.
-
-### haskell-language-server
-
-[Haskell Language Server](https://github.com/haskell/haskell-language-server) is a language server implementation that should work in any editor with an LSP client.
-It must be compiled with the same version of `ghc` as used by the project.
-We provide a function here to fetch the `haskell-language-server-wrapper` and cached `haskell-language-server` binaries for various Haskell versions.
-To add it to your environment:
-
-```sh
-nix-env -if https://github.com/EarnestResearch/er-nix/tarball/master -A tools.haskell-language-servers
-```
-
-home-manager users can add the values to `home.packages`:
-
-```nix
-let
-  er-nix = import sources.er-nix;
-{
-  home.packages = [
-    # Your other nixpkgs here
-  ] ++ builtins.attrValues er-nix.tools.haskell-language-servers;
-}
-```
-
-There is also a `tools.haskellLanguageServersFor` function that takes an array of ghcVersions, but this isn't guaranteed to be in our cachix.
-If you need more, please consider a PR here.
 
 ### hopenpgp-tools
 

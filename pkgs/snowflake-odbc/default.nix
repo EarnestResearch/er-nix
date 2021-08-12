@@ -11,27 +11,27 @@ let
   name = "${pname}-${version}";
 
   sha256 = {
-    x86_64-darwin = "c7318be7631d8480340b49fd9ad175dc8925c56ffad030269dbe701944e11bf5";
-    x86_64-linux = "65fceb95a4e44e25522801097b390bb4ec985248e8ceda55db08ee5620aac409";
+    x86_64-darwin =
+      "c7318be7631d8480340b49fd9ad175dc8925c56ffad030269dbe701944e11bf5";
+    x86_64-linux =
+      "65fceb95a4e44e25522801097b390bb4ec985248e8ceda55db08ee5620aac409";
   }.${system} or throwSystem;
 
   url = {
-    x86_64-darwin = "https://sfc-repo.snowflakecomputing.com/odbc/mac64/latest/snowflake_odbc_mac-${version}.dmg";
-    x86_64-linux = "https://sfc-repo.snowflakecomputing.com/odbc/linux/latest/snowflake_linux_x8664_odbc-${version}.tgz";
+    x86_64-darwin =
+      "https://sfc-repo.snowflakecomputing.com/odbc/mac64/latest/snowflake_odbc_mac-${version}.dmg";
+    x86_64-linux =
+      "https://sfc-repo.snowflakecomputing.com/odbc/linux/latest/snowflake_linux_x8664_odbc-${version}.tgz";
   }.${system} or throwSystem;
 
   meta = with lib; {
     description = "Snowflake ODBC drivers";
     homepage = "https://docs.snowflake.com/en/index.html";
-    downloadPage = "https://docs.snowflake.com/en/user-guide/odbc-download.html";
-    platforms = [
-      "x86_64-darwin"
-      "x86_64-linux"
-    ];
+    downloadPage =
+      "https://docs.snowflake.com/en/user-guide/odbc-download.html";
+    platforms = [ "x86_64-darwin" "x86_64-linux" ];
   };
-  src = fetchurl {
-    inherit url sha256;
-  };
+  src = fetchurl { inherit url sha256; };
   buildInputs = [ unixODBC ];
 
   installPhase = ''
@@ -78,6 +78,4 @@ let
     '';
   };
 in
-if stdenv.isDarwin
-then darwin
-else linux
+if stdenv.isDarwin then darwin else linux
