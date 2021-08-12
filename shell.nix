@@ -1,11 +1,6 @@
-let
-  bootstrap = import ./.;
-  pkgs = with bootstrap; defaultNixpkgs (nixpkgsArgs);
-in
-  with pkgs; mkShell {
-    inherit (earnestresearch.pre-commit-check) shellHook;
-    buildInputs = [
-      bootstrap.niv
-      nixpkgs-fmt
-    ];
-  }
+{ pkgs ? import ./. { } }:
+
+pkgs.mkShell {
+  inherit (pkgs.earnestresearch.pre-commit-check) shellHook;
+  buildInputs = [ pkgs.niv pkgs.nixpkgs-fmt ];
+}

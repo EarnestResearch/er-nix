@@ -6,11 +6,11 @@ let
 in
 {
   earnestresearch = {
-    upload_docker_to_aws = super.callPackage ../applications/upload_docker_to_aws {};
+    upload_docker_to_aws =
+      super.callPackage ../applications/upload_docker_to_aws { };
 
     lib = {
       docker.upload-to-aws = super.callPackage ../lib/docker/upload-to-aws;
-      cabal.project = earnestProject: super.callPackage ../lib/cabal/project.nix { earnestProject = earnestProject; };
     };
 
     pre-commit-check = import ../pre-commit-check;
