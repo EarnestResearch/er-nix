@@ -8,7 +8,7 @@ jobs:
   create-pull-request:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.3.4
+    - uses: actions/checkout@v2.3.5
       with:
         ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
     - uses: cachix/install-nix-action@v13
