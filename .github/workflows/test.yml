@@ -12,7 +12,7 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2.4.0
-    - uses: cachix/install-nix-action@v13
+    - uses: cachix/install-nix-action@v19
       with:
         nix_path: nixpkgs=channel:nixos-unstable
     - uses: cachix/cachix-action@v10
@@ -33,7 +33,7 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2.4.0
-    - uses: cachix/install-nix-action@v13
+    - uses: cachix/install-nix-action@v19
       with:
         nix_path: nixpkgs=channel:nixos-unstable
     - uses: cachix/cachix-action@v10
@@ -54,7 +54,7 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2.4.0
-    - uses: cachix/install-nix-action@v13
+    - uses: cachix/install-nix-action@v19
       with:
         nix_path: nixpkgs=channel:nixos-unstable
     - uses: cachix/cachix-action@v10
@@ -74,7 +74,7 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2.4.0
-    - uses: cachix/install-nix-action@v13
+    - uses: cachix/install-nix-action@v19
       with:
         nix_path: nixpkgs=channel:nixos-unstable
     - uses: cachix/cachix-action@v10
