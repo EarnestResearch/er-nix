@@ -23,7 +23,7 @@ jobs:
       run: curl -L https://www.stackage.org/lts/cabal.config > test/cabal.project.freeze
     - name: Create pull request
       id: cpr
-      uses: peter-evans/create-pull-request@v3.11.0
+      uses: peter-evans/create-pull-request@v5.0.2
       with:
         commit-message: Niv and LTS upgrades
         author: er-nix-bot <noreply@earnestresearch.com>
